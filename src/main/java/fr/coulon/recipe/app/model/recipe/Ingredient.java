@@ -1,9 +1,12 @@
 package fr.coulon.recipe.app.model.recipe;
 
+import java.awt.image.BufferedImage;
+
 public class Ingredient {
 
     private String name;
     private IngredientProperties ingredientProperties = new IngredientProperties();
+    private BufferedImage ingredientImage;
 
     public Ingredient(String name) {
         this.name = name;
@@ -15,6 +18,14 @@ public class Ingredient {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BufferedImage getIngredientImage() {
+        return ingredientImage;
+    }
+
+    public void setIngredientImage(BufferedImage ingredientImage) {
+        this.ingredientImage = ingredientImage;
     }
 
     public IngredientProperties getIngredientProperties() {

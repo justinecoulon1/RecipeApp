@@ -76,6 +76,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
         if (toUpdateIngredientCardPanel != null) {
             toUpdateIngredientCardPanel.getIngredientCardHeaderPanel().updateIngredientNameLabel();
             toUpdateIngredientCardPanel.updatePropertiesPanel();
+            toUpdateIngredientCardPanel.getIngredientCardHeaderPanel().updateIngredientImageLabel();
             if (super.getRootPane() != null) {
                 super.getRootPane().updateUI();
             }
@@ -99,7 +100,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
         dialog.setLocationRelativeTo(this);
         dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
 
-        IngredientEditCardPanel ingredientEditCardPanel = new IngredientEditCardPanel(this, ingredient, cardMode);
+        IngredientEditCardPanel ingredientEditCardPanel = new IngredientEditCardPanel(ingredient,this, cardMode);
         dialog.setContentPane(ingredientEditCardPanel);
 
         dialog.setVisible(true);

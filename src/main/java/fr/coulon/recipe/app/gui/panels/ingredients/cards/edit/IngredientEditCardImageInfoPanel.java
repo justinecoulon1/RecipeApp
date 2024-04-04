@@ -4,20 +4,31 @@ import fr.coulon.recipe.app.gui.util.ImageUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.gui.util.TitleSeparator;
 import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public class IngredientEditCardImageInfoPanel extends JPanel {
 
     private static final BufferedImage INVALID_IMAGE = ImageUtils.resizeImage(UiIcons.INVALID.getImage(), 185, 185);
     private final JTextArea urlTextArea;
     private final JLabel ingredientImageLabel;
+    private BufferedImage ingredientImage;
 
-    public IngredientEditCardImageInfoPanel() {
+    public IngredientEditCardImageInfoPanel(Ingredient ingredient) {
         this.setLayout(new MigLayout("fill, ins 15, nogrid"));
         this.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);
         this.setBorder(BorderFactory.createLineBorder(RecipeAppConstants.BORDERS_AND_SEPARATORS_WHITE_COLOR, 1));
@@ -30,14 +41,40 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
         this.add(dragImageLabel, "alignx center, wrap");
 
         ingredientImageLabel = new JLabel();
-        BufferedImage plusImage = ImageUtils.resizeImage(UiIcons.PLUS.getImage(), 185, 185);
+        ingredientImage = ingredient.getIngredientImage();
+        if (ingredientImage == null) {
+            ingredientImageLabel.setIcon(new ImageIcon(ImageUtils.resizeImage(UiIcons.PLUS.getImage(), 185, 185)));
+        } else {
+            ingredientImageLabel.setIcon(new ImageIcon(ImageUtils.resizeImage(ingredientImage, 250, 250)));
+        }
+
         ingredientImageLabel.setBackground(RecipeAppConstants.DECORATION_BACKGROUND_COLOR);
         ingredientImageLabel.setForeground(new Color(0x4E5052));
         ingredientImageLabel.setOpaque(true);
-        ingredientImageLabel.setIcon(new ImageIcon(plusImage));
+        ingredientImageLabel.setFont(RecipeAppConstants.TITLE_FONT);
         ingredientImageLabel.setHorizontalAlignment(JLabel.CENTER);
         ingredientImageLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         this.add(ingredientImageLabel, "h 250!, w 250!, alignx center, wrap");
+
+        ingredientImageLabel.setDropTarget(new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent dropTargetDropEvent) {
+                try {
+                    dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY);
+                    List<File> droppedFiles = (List<File>) dropTargetDropEvent.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+                    if (droppedFiles.size() == 1) {
+                        BufferedImage droppedImage = ImageIO.read(droppedFiles.get(0));
+                        updateIngredientImage(droppedImage);
+                    } else {
+                        ingredientImageLabel.setIcon(null);
+                        ingredientImageLabel.setText("Please drop a single file");
+                    }
+                } catch (UnsupportedFlavorException | IOException e) {
+                    ingredientImageLabel.setIcon(null);
+                    ingredientImageLabel.setText("Please drop a single file");
+                    e.printStackTrace();
+                }
+            }
+        });
 
         this.add(new TitleSeparator("OR", getBackground()), "grow, pushy, gapx 20 20, wrap");
 
@@ -76,18 +113,28 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
             String url = urlTextArea.getText();
             ingredientImageLabel.setIcon(null);
             ingredientImageLabel.setText("Downloading...");
-            ingredientImageLabel.setFont(RecipeAppConstants.TITLE_FONT);
-            IngredientEditCardImageInfoPanel.super.getRootPane().updateUI();
+            IngredientEditCardImageInfoPanel.this.revalidate();
+            IngredientEditCardImageInfoPanel.this.repaint();
             BufferedImage downloadedImage = ImageUtils.downloadImageFromUrl(url);
 
-            BufferedImage resizedImage = INVALID_IMAGE;
-            if (downloadedImage != null) {
-                resizedImage = ImageUtils.resizeImage(downloadedImage, 250, 250);
-            }
-
-            ingredientImageLabel.setIcon(new ImageIcon(resizedImage));
-            ingredientImageLabel.setText(null);
-            IngredientEditCardImageInfoPanel.super.getRootPane().updateUI();
+            updateIngredientImage(downloadedImage);
         }).start();
+    }
+
+    private void updateIngredientImage(BufferedImage image) {
+        BufferedImage resizedImage = INVALID_IMAGE;
+        if (image != null) {
+            resizedImage = ImageUtils.resizeImage(image, 250, 250);
+        }
+        ingredientImage = resizedImage;
+        ingredientImageLabel.setIcon(new ImageIcon(resizedImage));
+        ingredientImageLabel.setText(null);
+
+        this.revalidate();
+        this.repaint();
+    }
+
+    public BufferedImage getIngredientImage() {
+        return ingredientImage;
     }
 }

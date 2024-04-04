@@ -3,6 +3,7 @@ package fr.coulon.recipe.app.model.managers;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import fr.coulon.recipe.app.model.recipe.IngredientProperties;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,10 @@ public class IngredientManager {
             ingredientListener.onIngredientDeletion(ingredient);
         }
     }
-    public void updateIngredient(Ingredient ingredient, String newIngredientName, IngredientProperties ingredientProperties) {
+    public void updateIngredient(Ingredient ingredient, String newIngredientName, IngredientProperties ingredientProperties, BufferedImage newIngredientImage) {
         ingredient.setName(newIngredientName);
         ingredient.setIngredientProperties(ingredientProperties);
+        ingredient.setIngredientImage(newIngredientImage);
         for (IngredientManagerListener ingredientListener : ingredientListeners) {
             ingredientListener.onIngredientUpdate(ingredient);
         }

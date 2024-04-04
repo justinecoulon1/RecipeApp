@@ -1,6 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.ingredients.cards;
 
 import fr.coulon.recipe.app.gui.panels.ingredients.IngredientsMainPanel;
+import fr.coulon.recipe.app.gui.panels.ingredients.cards.headers.IngredientCardHeaderPanel;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
@@ -41,10 +42,6 @@ public class IngredientCardPanel extends JPanel {
 
     public void updatePropertiesPanel() {
         ingredientPropertiesPanel.updateIngredientProperties(ingredient.getIngredientProperties());
-    }
-
-    public IngredientPropertiesPanel getIngredientPropertiesPanel() {
-        return ingredientPropertiesPanel;
     }
 
     public IngredientCardHeaderPanel getIngredientCardHeaderPanel() {

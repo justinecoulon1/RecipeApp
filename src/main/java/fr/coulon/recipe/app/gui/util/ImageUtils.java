@@ -1,11 +1,15 @@
 package fr.coulon.recipe.app.gui.util;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.awt.image.ImageProducer;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.URL;
 
 public class ImageUtils {
     public static BufferedImage resizeImage(BufferedImage image, int width, int height) {
@@ -25,4 +29,11 @@ public class ImageUtils {
         return Toolkit.getDefaultToolkit().createImage(producer);
     }
 
+    public static BufferedImage downloadImageFromUrl(String url) { // String fileName, String directory
+        try (BufferedInputStream input = new BufferedInputStream(new URL(url).openStream())) {
+            return ImageIO.read(input);
+        } catch (IOException e) {
+            return null;
+        }
+    }
 }

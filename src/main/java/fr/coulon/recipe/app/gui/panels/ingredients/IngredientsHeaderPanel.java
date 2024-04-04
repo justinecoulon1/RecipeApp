@@ -1,7 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.ingredients;
 
-import fr.coulon.recipe.app.gui.util.ImageUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
+import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
 import fr.coulon.recipe.app.gui.util.UiIcons;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
@@ -9,7 +9,6 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 
 public class IngredientsHeaderPanel extends JPanel {
     private final IngredientsMainPanel ingredientsMainPanel;
@@ -27,14 +26,10 @@ public class IngredientsHeaderPanel extends JPanel {
         stepsTitleLabel.setOpaque(true);
         this.add(stepsTitleLabel, "grow");
 
-        JButton addIngredientButton = new JButton();
+        JButton addIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
         addIngredientButton.addActionListener(this::handleAddIngredientButton);
-        BufferedImage plusImage = ImageUtils.resizeImage(UiIcons.PLUS.getImage(), 15, 15);
-        addIngredientButton.setBackground(RecipeAppConstants.DECORATION_BACKGROUND_COLOR);
-        addIngredientButton.setIcon(new ImageIcon(plusImage));
-        addIngredientButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-        addIngredientButton.setFocusable(false);
         this.add(addIngredientButton, "h 45!, w 45!, dock east, gapafter 15");
+
     }
 
     public void handleAddIngredientButton(ActionEvent e) {

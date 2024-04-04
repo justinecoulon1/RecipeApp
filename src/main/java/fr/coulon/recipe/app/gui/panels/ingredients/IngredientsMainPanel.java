@@ -95,7 +95,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
 
         dialog = new JDialog(topFrame);
         dialog.setResizable(false);
-        dialog.setSize(750, 600);
+        dialog.setSize(730, 550);
         dialog.setLocationRelativeTo(this);
         dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
 

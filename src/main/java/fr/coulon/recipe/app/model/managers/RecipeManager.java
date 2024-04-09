@@ -17,12 +17,14 @@ public class RecipeManager {
 
     private RecipeManager() {
     }
+
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
         for (RecipeManagerListener listener : listeners) {
             listener.onRecipeAddition(recipe);
         }
     }
+
     public void deleteRecipe(Recipe recipe) {
         recipes.remove(recipe);
         if (recipe == selectedRecipe) {
@@ -36,12 +38,14 @@ public class RecipeManager {
             listener.onRecipeDeletion(recipe);
         }
     }
+
     public void selectRecipe(Recipe recipe) {
         selectedRecipe = recipe;
         for (RecipeManagerListener listener : listeners) {
             listener.onRecipeSelection(selectedRecipe);
         }
     }
+
     public void updateRecipe(Recipe toUpdateRecipe, String newRecipeName, List<Step> newSteps, Map<Ingredient, String> newAmountByIngredient) {
         toUpdateRecipe.setName(newRecipeName);
         toUpdateRecipe.getSteps().clear();

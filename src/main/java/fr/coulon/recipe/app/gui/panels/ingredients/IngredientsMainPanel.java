@@ -11,6 +11,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
     private final JPanel cardContainerPanel;
     private final List<IngredientCardPanel> ingredientCardPanels = new ArrayList<>();
     private JDialog dialog;
+
     public IngredientsMainPanel() {
         IngredientManager.INSTANCE.addListener(this);
         this.setLayout(new MigLayout("fill, ins 0"));
@@ -64,6 +67,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
             }
         }
     }
+
     @Override
     public void onIngredientUpdate(Ingredient ingredient) {
         IngredientCardPanel toUpdateIngredientCardPanel = null;
@@ -102,6 +106,13 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
 
         IngredientEditCardPanel ingredientEditCardPanel = new IngredientEditCardPanel(ingredient,this, cardMode);
         dialog.setContentPane(ingredientEditCardPanel);
+
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                ingredientEditCardPanel.getIngredientEditCardHeaderPanel().requestFocusTextField();
+            }
+        });
 
         dialog.setVisible(true);
     }

@@ -50,4 +50,8 @@ public class IngredientEditCardPanel extends JPanel{
     public IngredientPropertiesPanel getIngredientPropertiesPanel() {
         return ingredientPropertiesPanel;
     }
+
+    public IngredientEditCardHeaderPanel getIngredientEditCardHeaderPanel() {
+        return ingredientEditCardHeaderPanel;
+    }
 }

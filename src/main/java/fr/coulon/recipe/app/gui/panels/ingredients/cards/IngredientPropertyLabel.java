@@ -1,7 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.ingredients.cards;
 
-import fr.coulon.recipe.app.gui.util.ImageUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
 
 public class IngredientPropertyLabel extends JLabel implements MouseListener {
 
-    private ImageIcon imageIcon;
-    private ImageIcon grayImageIcon;
+    private final ImageIcon imageIcon;
+    private final ImageIcon grayImageIcon;
     private boolean selected = false;
     public IngredientPropertyLabel(UiIcons icon, IngredientsCardMode cardMode) {
 

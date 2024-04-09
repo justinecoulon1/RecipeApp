@@ -1,7 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.recipes.display.ingredients;
 
 import fr.coulon.recipe.app.gui.panels.recipes.display.RecipeDisplayMode;
-import fr.coulon.recipe.app.gui.util.RecipeAppBorderUtils;
+import fr.coulon.recipe.app.gui.util.ui.RecipeAppBorderUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import fr.coulon.recipe.app.model.recipe.Recipe;
@@ -17,7 +17,7 @@ public class RecipeIngredientsDisplayPanel extends JPanel {
 
     private final JPanel recipeIngredientsContainerPanel;
     private final RecipeIngredientsDisplayHeaderPanel recipeIngredientsDisplayHeaderPanel;
-    private List<RecipeIngredientPanel> recipeIngredientsPanels = new ArrayList<>();
+    private final List<RecipeIngredientPanel> recipeIngredientsPanels = new ArrayList<>();
 
     public RecipeIngredientsDisplayPanel(Recipe recipe, RecipeDisplayMode displayMode) {
 
@@ -40,8 +40,8 @@ public class RecipeIngredientsDisplayPanel extends JPanel {
         this.addIngredientPanels(recipe.getAmountByIngredient(), displayMode);
     }
 
-    private void addIngredientPanels(Map<Ingredient, String> amountByIngredient, RecipeDisplayMode displayMode) { //TODO rajouter le mode pour pas rajouter panel si vide en mode read
-        if (amountByIngredient.isEmpty()) {
+    private void addIngredientPanels(Map<Ingredient, String> amountByIngredient, RecipeDisplayMode displayMode) {
+        if (displayMode !=RecipeDisplayMode.READ && amountByIngredient.isEmpty()) {
             this.addIngredientPanel(new Ingredient(""), "0", displayMode);
         } else {
             for (Map.Entry<Ingredient, String> entry : amountByIngredient.entrySet()) {

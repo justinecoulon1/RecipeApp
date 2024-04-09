@@ -2,8 +2,8 @@ package fr.coulon.recipe.app.gui.panels.recipes.display;
 
 import fr.coulon.recipe.app.gui.panels.recipes.RecipeMainPanel;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.managers.RecipeManager;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import fr.coulon.recipe.app.model.recipe.Recipe;
@@ -18,12 +18,12 @@ import java.util.Map;
 
 public class RecipeDisplayHeaderPanel extends JPanel {
     private Recipe recipe;
-    private JTextField recipeNameTextField;
+    private final JTextField recipeNameTextField;
     private final RecipeDisplayPanel recipeDisplayPanel;
     private final RecipeMainPanel recipeMainPanel;
-    private JButton cancelModificationButton;
-    private JButton validateModificationButton;
-    private JButton editRecipeButton;
+    private final JButton cancelModificationButton;
+    private final JButton validateModificationButton;
+    private final JButton editRecipeButton;
 
     public RecipeDisplayHeaderPanel(Recipe recipe, RecipeMainPanel recipeMainPanel, RecipeDisplayPanel recipeDisplayPanel, RecipeDisplayMode displayMode) {
         this.recipe = recipe;

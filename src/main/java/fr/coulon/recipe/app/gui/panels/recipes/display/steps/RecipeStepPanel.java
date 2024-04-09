@@ -2,8 +2,8 @@ package fr.coulon.recipe.app.gui.panels.recipes.display.steps;
 
 import fr.coulon.recipe.app.gui.panels.recipes.display.RecipeDisplayMode;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.recipe.Step;
 import net.miginfocom.swing.MigLayout;
 
@@ -14,10 +14,10 @@ import java.awt.event.ActionEvent;
 public class RecipeStepPanel extends JPanel {
 
     private final RecipeStepsDisplayPanel recipeStepsDisplayPanel;
-    private JButton deleteStepButton;
-    private Step step;
-    private JLabel stepNumberLabel;
-    private JTextArea stepDescriptionTextArea;
+    private final JButton deleteStepButton;
+    private final Step step;
+    private final JLabel stepNumberLabel;
+    private final JTextArea stepDescriptionTextArea;
 
     public RecipeStepPanel(Step step, int stepIndex, RecipeStepsDisplayPanel recipeStepsDisplayPanel, RecipeDisplayMode displayMode) {
         this.recipeStepsDisplayPanel = recipeStepsDisplayPanel;

@@ -1,8 +1,8 @@
 package fr.coulon.recipe.app.gui.panels.recipes.list;
 
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.managers.RecipeManager;
 import fr.coulon.recipe.app.model.recipe.Recipe;
 
@@ -15,10 +15,10 @@ import java.awt.event.MouseListener;
 
 public class RecipeNamePanel extends JPanel implements MouseListener {
 
-    private Recipe recipe;
-    private JLabel recipeNameLabel;
-    private JButton deleteRecipeButton;
-    private Component deleteRecipeButtonFiller;
+    private final Recipe recipe;
+    private final JLabel recipeNameLabel;
+    private final JButton deleteRecipeButton;
+    private final Component deleteRecipeButtonFiller;
     public RecipeNamePanel(Recipe recipe) {
         this.recipe = recipe;
         this.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);

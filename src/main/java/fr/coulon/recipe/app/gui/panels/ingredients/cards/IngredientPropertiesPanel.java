@@ -1,7 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.ingredients.cards;
 
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.recipe.IngredientProperties;
 import net.miginfocom.swing.MigLayout;
 

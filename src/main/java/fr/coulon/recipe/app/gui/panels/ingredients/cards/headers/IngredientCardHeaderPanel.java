@@ -3,10 +3,10 @@ package fr.coulon.recipe.app.gui.panels.ingredients.cards.headers;
 import fr.coulon.recipe.app.gui.panels.ingredients.IngredientsMainPanel;
 import fr.coulon.recipe.app.gui.panels.ingredients.cards.IngredientCardPanel;
 import fr.coulon.recipe.app.gui.panels.ingredients.cards.IngredientsCardMode;
-import fr.coulon.recipe.app.gui.util.ImageUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.managers.IngredientManager;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 
@@ -18,10 +18,10 @@ import java.awt.image.BufferedImage;
 public class IngredientCardHeaderPanel extends IngredientCardHeader {
 
     private final IngredientsMainPanel ingredientsMainPanel;
-    private JLabel ingredientNameLabel;
-    private Ingredient ingredient;
+    private final JLabel ingredientNameLabel;
+    private final Ingredient ingredient;
     private final IngredientCardPanel ingredientCardPanel;
-    private JLabel ingredientImageLabel;
+    private final JLabel ingredientImageLabel;
 
     public IngredientCardHeaderPanel(Ingredient ingredient, IngredientsMainPanel ingredientsMainPanel, IngredientCardPanel ingredientCardPanel, IngredientsCardMode cardMode) {
         this.ingredientsMainPanel = ingredientsMainPanel;

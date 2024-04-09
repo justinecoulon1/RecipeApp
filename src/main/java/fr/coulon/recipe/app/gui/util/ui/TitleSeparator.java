@@ -1,5 +1,6 @@
-package fr.coulon.recipe.app.gui.util;
+package fr.coulon.recipe.app.gui.util.ui;
 
+import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

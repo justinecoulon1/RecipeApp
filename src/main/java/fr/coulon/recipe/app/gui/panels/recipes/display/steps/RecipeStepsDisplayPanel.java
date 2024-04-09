@@ -1,7 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.recipes.display.steps;
 
 import fr.coulon.recipe.app.gui.panels.recipes.display.RecipeDisplayMode;
-import fr.coulon.recipe.app.gui.util.RecipeAppBorderUtils;
+import fr.coulon.recipe.app.gui.util.ui.RecipeAppBorderUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.model.recipe.Recipe;
 import fr.coulon.recipe.app.model.recipe.Step;
@@ -15,7 +15,7 @@ public class RecipeStepsDisplayPanel extends JPanel {
 
     private final JPanel recipeStepsContainerPanel;
     private final RecipeStepsDisplayHeaderPanel recipeStepsDisplayHeaderPanel;
-    private List<RecipeStepPanel> recipeStepPanels = new ArrayList<>();
+    private final List<RecipeStepPanel> recipeStepPanels = new ArrayList<>();
 
     public RecipeStepsDisplayPanel(Recipe recipe, RecipeDisplayMode displayMode) {
 

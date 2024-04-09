@@ -1,8 +1,8 @@
 package fr.coulon.recipe.app.gui.panels.recipes.list;
 
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.managers.RecipeManager;
 import fr.coulon.recipe.app.model.recipe.Recipe;
 import net.miginfocom.swing.MigLayout;

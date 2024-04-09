@@ -4,8 +4,8 @@ import fr.coulon.recipe.app.gui.panels.ingredients.IngredientsMainPanel;
 import fr.coulon.recipe.app.gui.panels.ingredients.cards.IngredientsCardMode;
 import fr.coulon.recipe.app.gui.panels.ingredients.cards.edit.IngredientEditCardPanel;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.managers.IngredientManager;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 
@@ -65,5 +65,9 @@ public class IngredientEditCardHeaderPanel extends IngredientCardHeader {
     public void handleValidateCreateIngredientCardButton(ActionEvent e) {
         IngredientManager.INSTANCE.addIngredient(ingredient);
         handleValidateEditIngredientCardButton(e);
+    }
+
+    public void requestFocusTextField() {
+        this.ingredientNameTextField.requestFocus();
     }
 }

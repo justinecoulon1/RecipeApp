@@ -1,4 +1,8 @@
-package fr.coulon.recipe.app.gui.util;
+package fr.coulon.recipe.app.gui.util.ui;
+
+import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
+import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
 package fr.coulon.recipe.app.gui.panels.recipes.list;
 
-import fr.coulon.recipe.app.gui.util.RecipeAppBorderUtils;
+import fr.coulon.recipe.app.gui.util.ui.RecipeAppBorderUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.model.managers.RecipeManager;
 import fr.coulon.recipe.app.model.managers.RecipeManagerListener;

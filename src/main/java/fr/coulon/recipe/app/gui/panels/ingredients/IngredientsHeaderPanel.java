@@ -1,8 +1,8 @@
 package fr.coulon.recipe.app.gui.panels.ingredients;
 
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.RecipeButtonUtils;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
 
@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class IngredientsHeaderPanel extends JPanel {
+
     private final IngredientsMainPanel ingredientsMainPanel;
 
     public IngredientsHeaderPanel(IngredientsMainPanel ingredientsMainPanel) {

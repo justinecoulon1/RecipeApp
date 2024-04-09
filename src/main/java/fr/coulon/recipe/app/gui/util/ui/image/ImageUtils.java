@@ -1,4 +1,4 @@
-package fr.coulon.recipe.app.gui.util;
+package fr.coulon.recipe.app.gui.util.ui.image;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

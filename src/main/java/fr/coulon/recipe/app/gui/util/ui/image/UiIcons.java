@@ -1,4 +1,4 @@
-package fr.coulon.recipe.app.gui.util;
+package fr.coulon.recipe.app.gui.util.ui.image;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 public enum UiIcons {
 
-    TOQUE("/icons/toque.png"), // TOQUE = new UiIcons("/icons/toque.png")
+    TOQUE("/icons/toque.png"),
     PLUS("/icons/plus.png"),
     VALIDATE("/icons/validate.png"),
     DELETE("/icons/delete.png"),

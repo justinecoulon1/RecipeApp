@@ -2,9 +2,9 @@ package fr.coulon.recipe.app.gui.panels;
 
 import fr.coulon.recipe.app.gui.panels.ingredients.IngredientsMainPanel;
 import fr.coulon.recipe.app.gui.panels.recipes.RecipeMainPanel;
-import fr.coulon.recipe.app.gui.util.ImageUtils;
+import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
-import fr.coulon.recipe.app.gui.util.UiIcons;
+import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NavigationBarPanel extends JPanel {
-    private TabPanel recipeTab;
-    private TabPanel ingredientsTab;
-    private List<TabPanel> tabPanels = new ArrayList<>();
+    private final List<TabPanel> tabPanels = new ArrayList<>();
     private final MainPanel mainPanel;
 
     public NavigationBarPanel(MainPanel mainPanel) {
@@ -28,13 +26,13 @@ public class NavigationBarPanel extends JPanel {
         this.add(tabContainerPanel, "dock north");
 
         BufferedImage recipeImage = ImageUtils.resizeImage(UiIcons.RECIPE.getImage(), 64, 64);
-        recipeTab = new TabPanel(recipeImage, this, new RecipeMainPanel());
+        TabPanel recipeTab = new TabPanel(recipeImage, this, new RecipeMainPanel());
         tabContainerPanel.add(recipeTab, "aligny top, h 80!, w 80!, wrap");
         recipeTab.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, RecipeAppConstants.PANEL_BACKGROUND_COLOR));
         tabPanels.add(recipeTab);
 
         BufferedImage ingredientsImage = ImageUtils.resizeImage(UiIcons.INGREDIENTS.getImage(), 64, 64);
-        ingredientsTab = new TabPanel(ingredientsImage, this, new IngredientsMainPanel());
+        TabPanel ingredientsTab = new TabPanel(ingredientsImage, this, new IngredientsMainPanel());
         tabContainerPanel.add(ingredientsTab, "aligny top, h 80!, w 80!, wrap");
         ingredientsTab.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, RecipeAppConstants.PANEL_BACKGROUND_COLOR));
         tabPanels.add(ingredientsTab);

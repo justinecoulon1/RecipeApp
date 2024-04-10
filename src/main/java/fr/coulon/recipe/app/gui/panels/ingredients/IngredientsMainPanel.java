@@ -38,6 +38,10 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setBorder(null);
         this.add(scrollPane,"growx, aligny top");
+
+        for (Ingredient ingredient :IngredientManager.INSTANCE.getAllIngredients()) {
+            onIngredientAddition(ingredient);
+        }
     }
 
     @Override

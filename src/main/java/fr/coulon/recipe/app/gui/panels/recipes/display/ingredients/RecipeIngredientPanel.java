@@ -12,18 +12,22 @@ import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class RecipeIngredientPanel extends JPanel {
 
     private static final BufferedImage UNKNOWN_IMAGE = ImageUtils.resizeImage(UiIcons.UNKNOWN.getImage(), 40, 40);
     private final JButton deleteIngredientButton;
     private final RecipeIngredientsDisplayPanel recipeIngredientsDisplayPanel;
-    private final Ingredient ingredient;
+    private Ingredient ingredient;
     private final SearchableTextField ingredientNameTextField;
     private final JTextField ingredientAmountTextField;
+    private final JLabel ingredientImageLabel;
 
     public RecipeIngredientPanel(Ingredient ingredient, String amount, RecipeIngredientsDisplayPanel recipeIngredientsDisplayPanel, RecipeDisplayMode displayMode) {
         this.ingredient = ingredient;
@@ -32,15 +36,10 @@ public class RecipeIngredientPanel extends JPanel {
         this.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);
         this.setLayout(new MigLayout("fill, nogrid, ins 0"));
 
-        JLabel ingredientImageLabel = new JLabel();
-        BufferedImage ingredientImage = UNKNOWN_IMAGE;
-        if (ingredient.getIngredientImage() != null) {
-            ingredientImage = ingredient.getIngredientImage();
-        }
+        ingredientImageLabel = new JLabel();
         ingredientImageLabel.setBackground(RecipeAppConstants.DECORATION_BACKGROUND_COLOR);
         ingredientImageLabel.setForeground(new Color(0x4E5052));
         ingredientImageLabel.setOpaque(true);
-        ingredientImageLabel.setIcon(new ImageIcon(ingredientImage));
         ingredientImageLabel.setHorizontalAlignment(JLabel.CENTER);
         ingredientImageLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         this.add(ingredientImageLabel, "h 50!, w 50!, gapbefore 15");
@@ -60,6 +59,22 @@ public class RecipeIngredientPanel extends JPanel {
 
         SearchableTextFieldItemsGetter itemsGetter = () -> IngredientManager.INSTANCE.getIngredientsNames().toArray(String[]::new);
         ingredientNameTextField = new SearchableTextField(itemsGetter, ingredient.getName());
+        ingredientNameTextField.getTextField().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                onIngredientNameChange();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                onIngredientNameChange();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                onIngredientNameChange();
+            }
+        });
         ingredientNameTextField.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);
         ingredientNameTextField.setFont(RecipeAppConstants.DEFAULT_FONT);
         ingredientNameTextField.getTextField().setFont(RecipeAppConstants.DEFAULT_FONT);
@@ -89,7 +104,14 @@ public class RecipeIngredientPanel extends JPanel {
         deleteIngredientButton.addActionListener(this::handleDeleteIngredientButton);
         this.add(deleteIngredientButton, "aligny top, alignx right, h 30!, w 30!, gapbefore 10, gapafter 15, gaptop 10");
 
+        updateIngredient(ingredient);
         updateDisplayMode(displayMode);
+    }
+
+    private void onIngredientNameChange() {
+        String ingredientName = ingredientNameTextField.getText();
+        Ingredient newIngredient = IngredientManager.INSTANCE.getIngredientByName(ingredientName);
+        updateIngredient(Objects.requireNonNullElseGet(newIngredient, () -> new Ingredient(ingredientName)));
     }
 
     private void handleDeleteIngredientButton(ActionEvent e) {
@@ -130,5 +152,15 @@ public class RecipeIngredientPanel extends JPanel {
 
             deleteIngredientButton.setVisible(false);
         }
+    }
+
+    private void updateIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+
+        BufferedImage ingredientImage = UNKNOWN_IMAGE;
+        if (ingredient.getIngredientImage() != null) {
+            ingredientImage = ImageUtils.resizeImage(ingredient.getIngredientImage(), 50, 50) ;
+        }
+        ingredientImageLabel.setIcon(new ImageIcon(ingredientImage));
     }
 }

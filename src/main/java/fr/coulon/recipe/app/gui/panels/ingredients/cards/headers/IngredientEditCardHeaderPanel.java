@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class IngredientEditCardHeaderPanel extends IngredientCardHeader {
+public class IngredientEditCardHeaderPanel extends IngredientCardHeaderPanel {
     private final IngredientsMainPanel ingredientsMainPanel;
     private final JTextField ingredientNameTextField;
     private final Ingredient ingredient;
@@ -30,7 +30,7 @@ public class IngredientEditCardHeaderPanel extends IngredientCardHeader {
         ingredientNameTextField.setFont(RecipeAppConstants.SMALL_TITLE_FONT);
         ingredientNameTextField.setForeground(Color.white);
         ingredientNameTextField.setOpaque(true);
-        this.add(ingredientNameTextField, "aligny center, gapbefore 10");
+        this.add(ingredientNameTextField, "aligny center, gapbefore 10, growx");
 
         if (cardMode == IngredientsCardMode.UPDATE || cardMode == IngredientsCardMode.CREATE) {
             JButton cancelEditButton = RecipeButtonUtils.createSmallButton(UiIcons.CANCEL);
@@ -38,33 +38,23 @@ public class IngredientEditCardHeaderPanel extends IngredientCardHeader {
             this.add(cancelEditButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
         }
 
-        if (cardMode == IngredientsCardMode.UPDATE) {
+        if (cardMode == IngredientsCardMode.UPDATE || cardMode == IngredientsCardMode.CREATE) {
             JButton validateUpdateButton = RecipeButtonUtils.createSmallButton(UiIcons.VALIDATE);
-            validateUpdateButton.addActionListener(this::handleValidateEditIngredientCardButton);
+            validateUpdateButton.addActionListener(e -> handleValidateIngredientCardButton(cardMode));
             this.add(validateUpdateButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
-        }
-
-        if (cardMode == IngredientsCardMode.CREATE) {
-            JButton validateCreateButton = RecipeButtonUtils.createSmallButton(UiIcons.VALIDATE);
-            validateCreateButton.addActionListener(this::handleValidateCreateIngredientCardButton);
-            this.add(validateCreateButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
         }
     }
     public void handleCancelEditIngredientCardButton(ActionEvent e) {
         ingredientsMainPanel.closeIngredientPopup();
     }
 
-    public void handleValidateEditIngredientCardButton(ActionEvent e) {
-        IngredientManager.INSTANCE.updateIngredient(ingredient,
+    private void handleValidateIngredientCardButton(IngredientsCardMode cardMode) {
+        IngredientManager.INSTANCE.addOrUpdateIngredient(ingredient,
+                cardMode == IngredientsCardMode.UPDATE,
                 ingredientNameTextField.getText(),
                 ingredientEditCardPanel.getIngredientPropertiesPanel().getUpdatedIngredientProperties(),
                 ingredientEditCardPanel.getIngredientEditCardImageInfoPanel().getIngredientImage());
         ingredientsMainPanel.closeIngredientPopup();
-    }
-
-    public void handleValidateCreateIngredientCardButton(ActionEvent e) {
-        IngredientManager.INSTANCE.addIngredient(ingredient);
-        handleValidateEditIngredientCardButton(e);
     }
 
     public void requestFocusTextField() {

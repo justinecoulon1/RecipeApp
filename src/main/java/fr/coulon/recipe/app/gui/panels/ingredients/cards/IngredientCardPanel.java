@@ -1,7 +1,7 @@
 package fr.coulon.recipe.app.gui.panels.ingredients.cards;
 
 import fr.coulon.recipe.app.gui.panels.ingredients.IngredientsMainPanel;
-import fr.coulon.recipe.app.gui.panels.ingredients.cards.headers.IngredientCardHeaderPanel;
+import fr.coulon.recipe.app.gui.panels.ingredients.cards.headers.IngredientViewCardHeaderPanel;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
@@ -13,7 +13,7 @@ public class IngredientCardPanel extends JPanel {
     private final IngredientsMainPanel ingredientsMainPanel;
     private Ingredient ingredient;
     private IngredientPropertiesPanel ingredientPropertiesPanel;
-    private final IngredientCardHeaderPanel ingredientCardHeaderPanel;
+    private final IngredientViewCardHeaderPanel ingredientViewCardHeaderPanel;
 
     public IngredientCardPanel(IngredientsMainPanel ingredientsMainPanel, Ingredient ingredient, IngredientsCardMode cardMode) {
         this.ingredientsMainPanel = ingredientsMainPanel;
@@ -23,9 +23,9 @@ public class IngredientCardPanel extends JPanel {
         this.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);
         this.setBorder(BorderFactory.createLineBorder(RecipeAppConstants.BORDERS_AND_SEPARATORS_WHITE_COLOR, 1));
 
-        ingredientCardHeaderPanel = new IngredientCardHeaderPanel(ingredient, ingredientsMainPanel, this, cardMode);
-        ingredientCardHeaderPanel.setBackground(getBackground());
-        this.add(ingredientCardHeaderPanel, "growx, h 120!,dock north, wrap");
+        ingredientViewCardHeaderPanel = new IngredientViewCardHeaderPanel(ingredient, ingredientsMainPanel, this);
+        ingredientViewCardHeaderPanel.setBackground(getBackground());
+        this.add(ingredientViewCardHeaderPanel, "growx, h 120!,dock north, wrap");
 
         JSeparator separator = new JSeparator();
         separator.setForeground(RecipeAppConstants.BORDERS_AND_SEPARATORS_WHITE_COLOR);
@@ -44,7 +44,7 @@ public class IngredientCardPanel extends JPanel {
         ingredientPropertiesPanel.updateIngredientProperties(ingredient.getIngredientProperties());
     }
 
-    public IngredientCardHeaderPanel getIngredientCardHeaderPanel() {
-        return ingredientCardHeaderPanel;
+    public IngredientViewCardHeaderPanel getIngredientCardHeaderPanel() {
+        return ingredientViewCardHeaderPanel;
     }
 }

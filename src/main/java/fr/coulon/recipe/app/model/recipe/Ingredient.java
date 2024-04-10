@@ -12,6 +12,11 @@ public class Ingredient {
         this.name = name;
     }
 
+    @Deprecated
+    public Ingredient() {
+        // For jackson only
+    }
+
     public String getName() {
         return name;
     }

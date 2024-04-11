@@ -30,7 +30,7 @@ public class IngredientEditCardHeaderPanel extends IngredientCardHeaderPanel {
         ingredientNameTextField.setFont(RecipeAppConstants.SMALL_TITLE_FONT);
         ingredientNameTextField.setForeground(Color.white);
         ingredientNameTextField.setOpaque(true);
-        this.add(ingredientNameTextField, "aligny center, gapbefore 10, growx");
+        this.add(ingredientNameTextField, "aligny center, gapbefore 10, w 0:100%:100%");
 
         if (cardMode == IngredientsCardMode.UPDATE || cardMode == IngredientsCardMode.CREATE) {
             JButton cancelEditButton = RecipeButtonUtils.createSmallButton(UiIcons.CANCEL);

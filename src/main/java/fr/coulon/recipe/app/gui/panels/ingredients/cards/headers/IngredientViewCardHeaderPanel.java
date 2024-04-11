@@ -8,6 +8,7 @@ import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import fr.coulon.recipe.app.model.managers.IngredientManager;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +18,7 @@ import java.awt.image.BufferedImage;
 public class IngredientViewCardHeaderPanel extends IngredientCardHeaderPanel {
 
     private final IngredientsMainPanel ingredientsMainPanel;
-    private final JLabel ingredientNameLabel;
+    private final JTextArea ingredientNameTextArea;
     private final Ingredient ingredient;
     private final IngredientCardPanel ingredientCardPanel;
     private final JLabel ingredientImageLabel;
@@ -37,24 +38,32 @@ public class IngredientViewCardHeaderPanel extends IngredientCardHeaderPanel {
         ingredientImageLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         this.add(ingredientImageLabel, "h 100!, w 100!, aligny center, alignx left");
 
-        ingredientNameLabel = new JLabel();
-        ingredientNameLabel.setText(ingredient.getName());
-        ingredientNameLabel.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);
-        ingredientNameLabel.setFont(RecipeAppConstants.SMALL_TITLE_FONT);
-        ingredientNameLabel.setForeground(Color.white);
-        ingredientNameLabel.setOpaque(true);
-        this.add(ingredientNameLabel, "gaptop 25, aligny top, gapbefore 10, gaptop 47");
+        ingredientNameTextArea = new JTextArea();
+        ingredientNameTextArea.setEditable(false);
+        ingredientNameTextArea.setLineWrap(true);
+        ingredientNameTextArea.setWrapStyleWord(true);
+        ingredientNameTextArea.setText(ingredient.getName());
+        ingredientNameTextArea.setBackground(getBackground());
+        ingredientNameTextArea.setFont(RecipeAppConstants.SMALL_TITLE_FONT);
+        ingredientNameTextArea.setForeground(Color.white);
+        ingredientNameTextArea.setOpaque(true);
+        this.add(ingredientNameTextArea, "gapbefore 10, growx, aligny center");
+
+        JPanel buttonsPanel = new JPanel(new MigLayout("fill, ins 0, nogrid"));
+        buttonsPanel.setBackground(this.getBackground());
 
         JButton deleteIngredientCardButton = RecipeButtonUtils.createSmallButton(UiIcons.DELETE);
         deleteIngredientCardButton.addActionListener(this::handleDeleteIngredientCardButton);
-        this.add(deleteIngredientCardButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
+        buttonsPanel.add(deleteIngredientCardButton, "aligny top, alignx right, h 30!, w 30!, wrap");
 
         JButton editIngredientCardButton = RecipeButtonUtils.createSmallButton(UiIcons.EDIT);
         editIngredientCardButton.addActionListener(this::handleEditIngredientCardButton);
-        this.add(editIngredientCardButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
+        buttonsPanel.add(editIngredientCardButton, "aligny top, alignx right, h 30!, w 30!");
+
+        this.add(buttonsPanel, "alignx right, aligny top");
 
         updateIngredientImageLabel();
-        updateIngredientNameLabel();
+        updateIngredientNameTextArea();
     }
 
     public void handleDeleteIngredientCardButton(ActionEvent e) {
@@ -65,8 +74,8 @@ public class IngredientViewCardHeaderPanel extends IngredientCardHeaderPanel {
         ingredientsMainPanel.openUpdateIngredientPopup(ingredient);
     }
 
-    public void updateIngredientNameLabel() {
-        ingredientNameLabel.setText(ingredient.getName());
+    public void updateIngredientNameTextArea() {
+        ingredientNameTextArea.setText(ingredient.getName());
     }
 
     public void updateIngredientImageLabel() {

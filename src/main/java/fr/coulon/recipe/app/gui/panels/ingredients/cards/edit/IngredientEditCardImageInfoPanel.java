@@ -105,7 +105,6 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
         urlTextArea.setLineWrap(true);
         urlTextArea.setWrapStyleWord(true);
         this.add(urlTextArea, "growx, h 100!, alignx center");
-
     }
 
     private void handleRefreshImageButton(ActionEvent actionEvent) {

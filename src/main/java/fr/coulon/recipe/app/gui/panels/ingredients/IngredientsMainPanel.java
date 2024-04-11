@@ -31,15 +31,15 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
         IngredientsHeaderPanel ingredientsHeaderPanel = new IngredientsHeaderPanel(this);
         this.add(ingredientsHeaderPanel, "grow, h 70!, dock north, wrap");
 
-        cardContainerPanel = new JPanel(new MigLayout("fill, ins 10 30 10 20, gapx 5, gapy 5, wrap 4", "[23%][23%][23%][23%]", "[]"));
+        cardContainerPanel = new JPanel(new MigLayout("fill, ins 10, gapx 5, gapy 5, wrap 4", "[grow][grow][grow][grow]", "[]"));
         cardContainerPanel.setBackground(RecipeAppConstants.PANEL_BACKGROUND_COLOR);
         JScrollPane scrollPane = new JScrollPane(cardContainerPanel);
         scrollPane.setHorizontalScrollBar(null);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         scrollPane.setBorder(null);
-        this.add(scrollPane,"growx, aligny top");
+        this.add(scrollPane, "growx, aligny top");
 
-        for (Ingredient ingredient :IngredientManager.INSTANCE.getAllIngredients()) {
+        for (Ingredient ingredient : IngredientManager.INSTANCE.getAllIngredients()) {
             onIngredientAddition(ingredient);
         }
     }
@@ -47,7 +47,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
     @Override
     public void onIngredientAddition(Ingredient ingredient) {
         IngredientCardPanel ingredientCardPanel = new IngredientCardPanel(this, ingredient, IngredientsCardMode.READ);
-        cardContainerPanel.add(ingredientCardPanel, "h 440!, w 23%, aligny top, alignx left");
+        cardContainerPanel.add(ingredientCardPanel, "h 440!, w 24%!, aligny top, alignx left");
         ingredientCardPanels.add(ingredientCardPanel);
         if (super.getRootPane() != null) {
             super.getRootPane().updateUI();
@@ -82,7 +82,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
             }
         }
         if (toUpdateIngredientCardPanel != null) {
-            toUpdateIngredientCardPanel.getIngredientCardHeaderPanel().updateIngredientNameLabel();
+            toUpdateIngredientCardPanel.getIngredientCardHeaderPanel().updateIngredientNameTextArea();
             toUpdateIngredientCardPanel.updatePropertiesPanel();
             toUpdateIngredientCardPanel.getIngredientCardHeaderPanel().updateIngredientImageLabel();
             if (super.getRootPane() != null) {
@@ -108,7 +108,7 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
         dialog.setLocationRelativeTo(this);
         dialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
 
-        IngredientEditCardPanel ingredientEditCardPanel = new IngredientEditCardPanel(ingredient,this, cardMode);
+        IngredientEditCardPanel ingredientEditCardPanel = new IngredientEditCardPanel(ingredient, this, cardMode);
         dialog.setContentPane(ingredientEditCardPanel);
 
         dialog.addWindowListener(new WindowAdapter() {

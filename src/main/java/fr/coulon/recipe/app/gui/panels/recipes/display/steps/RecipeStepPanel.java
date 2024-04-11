@@ -33,7 +33,7 @@ public class RecipeStepPanel extends JPanel {
         stepNumberLabel.setVerticalAlignment(JLabel.TOP);
         stepNumberLabel.setForeground(Color.white);
         stepNumberLabel.setOpaque(true);
-        this.add(stepNumberLabel, "gapafter 10");
+        this.add(stepNumberLabel, "gapafter 10, aligny top");
 
         stepDescriptionTextArea = new JTextArea();
         stepDescriptionTextArea.setText(step.getDescription());
@@ -41,7 +41,7 @@ public class RecipeStepPanel extends JPanel {
         stepDescriptionTextArea.setForeground(Color.WHITE);
         stepDescriptionTextArea.setFont(RecipeAppConstants.DEFAULT_FONT);
         stepDescriptionTextArea.setOpaque(true);
-        stepDescriptionTextArea.setLineWrap(true); // Enable line wrapping
+        stepDescriptionTextArea.setLineWrap(true);
         stepDescriptionTextArea.setWrapStyleWord(true);
         this.add(stepDescriptionTextArea, "grow");
 

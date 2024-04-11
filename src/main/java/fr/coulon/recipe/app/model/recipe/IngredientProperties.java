@@ -2,10 +2,10 @@ package fr.coulon.recipe.app.model.recipe;
 
 public class IngredientProperties {
 
-    private boolean growingInWinter;
-    private boolean growingInSpring;
-    private boolean growingInSummer;
-    private boolean growingInAutumn;
+    private boolean growingInWinter = true;
+    private boolean growingInSpring = true;
+    private boolean growingInSummer = true;
+    private boolean growingInAutumn = true;
     private boolean carbohydrate;
     private boolean condiment;
     private boolean dairy;

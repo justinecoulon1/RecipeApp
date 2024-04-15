@@ -53,7 +53,7 @@ public class IngredientEditCardHeaderPanel extends IngredientCardHeaderPanel {
                 cardMode == IngredientsCardMode.UPDATE,
                 ingredientNameTextField.getText(),
                 ingredientEditCardPanel.getIngredientPropertiesPanel().getUpdatedIngredientProperties(),
-                ingredientEditCardPanel.getIngredientEditCardImageInfoPanel().getIngredientImage());
+                ingredientEditCardPanel.getIngredientEditCardImageInfoPanel().getModifiedIngredientImage());
         ingredientsMainPanel.closeIngredientPopup();
     }
 

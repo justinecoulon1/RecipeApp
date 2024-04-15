@@ -17,6 +17,8 @@ import java.awt.image.BufferedImage;
 
 public class IngredientViewCardHeaderPanel extends IngredientCardHeaderPanel {
 
+    private static final BufferedImage UNKNOWN_IMAGE = ImageUtils.resizeImage(UiIcons.UNKNOWN.getImage(), 85, 85);
+
     private final IngredientsMainPanel ingredientsMainPanel;
     private final JTextArea ingredientNameTextArea;
     private final Ingredient ingredient;
@@ -79,10 +81,10 @@ public class IngredientViewCardHeaderPanel extends IngredientCardHeaderPanel {
     }
 
     public void updateIngredientImageLabel() {
-        if (ingredient.getIngredientImage() == null) {
-            ingredientImageLabel.setIcon(new ImageIcon(ImageUtils.resizeImage(UiIcons.UNKNOWN.getImage(), 100, 100)));
-        } else {
-            ingredientImageLabel.setIcon(new ImageIcon(ImageUtils.resizeImage(ingredient.getIngredientImage(), 100, 100)));
+        BufferedImage ingredientImage = UNKNOWN_IMAGE;
+        if (ingredient.getIngredientImage() != null) {
+            ingredientImage = ImageUtils.resizeImage(ingredient.getIngredientImage(), 100, 100);
         }
+        ingredientImageLabel.setIcon(new ImageIcon(ingredientImage));
     }
 }

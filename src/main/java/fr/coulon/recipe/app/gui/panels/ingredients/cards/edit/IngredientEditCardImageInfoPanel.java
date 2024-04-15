@@ -1,9 +1,10 @@
 package fr.coulon.recipe.app.gui.panels.ingredients.cards.edit;
 
-import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.gui.util.ui.TitleSeparator;
+import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
+import fr.coulon.recipe.app.model.managers.util.EditImagePanel;
 import fr.coulon.recipe.app.model.recipe.Ingredient;
 import net.miginfocom.swing.MigLayout;
 
@@ -22,16 +23,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class IngredientEditCardImageInfoPanel extends JPanel {
-
-    private static final BufferedImage INVALID_IMAGE = ImageUtils.resizeImage(UiIcons.INVALID.getImage(), 185, 185);
     private final JTextArea urlTextArea;
-    private final JLabel ingredientImageLabel;
-    private BufferedImage ingredientImage;
+    private EditImagePanel editImagePanel;
 
     public IngredientEditCardImageInfoPanel(Ingredient ingredient) {
         this.setLayout(new MigLayout("fill, ins 15, nogrid"));
         this.setBackground(RecipeAppConstants.DARK_BACKGROUND_COLOR);
         this.setBorder(BorderFactory.createLineBorder(RecipeAppConstants.BORDERS_AND_SEPARATORS_WHITE_COLOR, 1));
+
+        JPanel ingredientImagePanel = new JPanel(new MigLayout("fill, nogrid, ins 0"));
+        ingredientImagePanel.setBackground(this.getBackground());
 
         JLabel dragImageLabel = new JLabel();
         dragImageLabel.setText("Drag an image below");
@@ -40,23 +41,15 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
         dragImageLabel.setBackground(getBackground());
         this.add(dragImageLabel, "alignx center, wrap");
 
-        ingredientImageLabel = new JLabel();
-        ingredientImage = ingredient.getIngredientImage();
+        BufferedImage ingredientImage = ingredient.getIngredientImage();
+        editImagePanel = new EditImagePanel(ingredientImage);
         if (ingredientImage == null) {
-            ingredientImageLabel.setIcon(new ImageIcon(ImageUtils.resizeImage(UiIcons.PLUS.getImage(), 185, 185)));
-        } else {
-            ingredientImageLabel.setIcon(new ImageIcon(ImageUtils.resizeImage(ingredientImage, 250, 250)));
+            editImagePanel.setPlaceHolderImage(UiIcons.PLUS.getImage());
         }
+        editImagePanel.setBackground(RecipeAppConstants.DECORATION_BACKGROUND_COLOR);
+        ingredientImagePanel.add(editImagePanel, "h 250!, w 250!, alignx center, wrap");
 
-        ingredientImageLabel.setBackground(RecipeAppConstants.DECORATION_BACKGROUND_COLOR);
-        ingredientImageLabel.setForeground(new Color(0x4E5052));
-        ingredientImageLabel.setOpaque(true);
-        ingredientImageLabel.setFont(RecipeAppConstants.TITLE_FONT);
-        ingredientImageLabel.setHorizontalAlignment(JLabel.CENTER);
-        ingredientImageLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-        this.add(ingredientImageLabel, "h 250!, w 250!, alignx center, wrap");
-
-        ingredientImageLabel.setDropTarget(new DropTarget() {
+        editImagePanel.setDropTarget(new DropTarget() {
             public synchronized void drop(DropTargetDropEvent dropTargetDropEvent) {
                 try {
                     dropTargetDropEvent.acceptDrop(DnDConstants.ACTION_COPY);
@@ -65,16 +58,17 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
                         BufferedImage droppedImage = ImageIO.read(droppedFiles.get(0));
                         updateIngredientImage(droppedImage);
                     } else {
-                        ingredientImageLabel.setIcon(null);
-                        ingredientImageLabel.setText("Please drop a single file");
+                        editImagePanel.setText("Please drop a single file");
+                        editImagePanel.setPlaceHolderImage(null);
+                        editImagePanel.setModifiableImage(null);
                     }
                 } catch (UnsupportedFlavorException | IOException e) {
-                    ingredientImageLabel.setIcon(null);
-                    ingredientImageLabel.setText("Please drop a single file");
+                    updateIngredientImage(null);
                     e.printStackTrace();
                 }
             }
         });
+        this.add(ingredientImagePanel, "growx, aligny top, wrap");
 
         this.add(new TitleSeparator("OR", getBackground()), "grow, pushy, gapx 20 20, wrap");
 
@@ -110,8 +104,7 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
     private void handleRefreshImageButton(ActionEvent actionEvent) {
         new Thread(() -> {
             String url = urlTextArea.getText();
-            ingredientImageLabel.setIcon(null);
-            ingredientImageLabel.setText("Downloading...");
+            editImagePanel.setText("Downloading...");
             IngredientEditCardImageInfoPanel.this.revalidate();
             IngredientEditCardImageInfoPanel.this.repaint();
             BufferedImage downloadedImage = ImageUtils.downloadImageFromUrl(url);
@@ -121,19 +114,20 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
     }
 
     private void updateIngredientImage(BufferedImage image) {
-        BufferedImage resizedImage = INVALID_IMAGE;
-        if (image != null) {
-            resizedImage = ImageUtils.resizeImage(image, 250, 250);
+        if (image == null) {
+            editImagePanel.setPlaceHolderImage(UiIcons.INVALID.getImage());
+            editImagePanel.setModifiableImage(null);
+        } else {
+            editImagePanel.setModifiableImage(image);
+            editImagePanel.setPlaceHolderImage(null);
         }
-        ingredientImage = resizedImage;
-        ingredientImageLabel.setIcon(new ImageIcon(resizedImage));
-        ingredientImageLabel.setText(null);
+        editImagePanel.setText(null);
 
         this.revalidate();
         this.repaint();
     }
 
-    public BufferedImage getIngredientImage() {
-        return ingredientImage;
+    public BufferedImage getModifiedIngredientImage() {
+        return editImagePanel.getModifiedImage();
     }
 }

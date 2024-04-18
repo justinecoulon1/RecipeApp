@@ -103,6 +103,12 @@ public class IngredientsMainPanel extends JPanel implements IngredientManagerLis
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
         dialog = new JDialog(topFrame);
+        if (cardMode == IngredientsCardMode.UPDATE) {
+            dialog.setTitle("Updating ingredient: " + ingredient.getName());
+        } else {
+            dialog.setTitle("New ingredient");
+        }
+
         dialog.setResizable(false);
         dialog.setSize(730, 550);
         dialog.setLocationRelativeTo(this);

@@ -97,4 +97,10 @@ public class RecipeIngredientsDisplayPanel extends JPanel {
             super.getRootPane().updateUI();
         }
     }
+
+    public void updateIngredientsDisplay() {
+        for (RecipeIngredientPanel ingredientPanel : recipeIngredientsPanels) {
+            ingredientPanel.updateIngredient();
+        }
+    }
 }

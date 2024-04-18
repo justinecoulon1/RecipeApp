@@ -27,6 +27,11 @@ public class RecipeMainPanel extends JPanel implements RecipeManagerListener {
         recipeListPanel = new RecipeListPanel();
         recipeListPanel.setBorder(BorderFactory.createLineBorder(RecipeAppConstants.BORDERS_AND_SEPARATORS_WHITE_COLOR, 2));
         this.add(recipeListPanel, "growy, w 250!");
+
+        for (Recipe recipe : RecipeManager.INSTANCE.getAllRecipes()) {
+            this.modeByRecipe.put(recipe, RecipeDisplayMode.READ);
+            recipeListPanel.onRecipeAddition(recipe);
+        }
     }
 
     @Override
@@ -34,10 +39,8 @@ public class RecipeMainPanel extends JPanel implements RecipeManagerListener {
         modeByRecipe.put(addedRecipe, RecipeDisplayMode.CREATE);
     }
 
-
     @Override
     public void onRecipeDeletion(Recipe deletedRecipe) {
-
     }
 
     @Override
@@ -61,7 +64,7 @@ public class RecipeMainPanel extends JPanel implements RecipeManagerListener {
 
     public void createOrUpdateRecipeDisplayPanel(Recipe selectedRecipe) {
         if (recipeDisplayPanel == null) {
-            recipeDisplayPanel = new RecipeDisplayPanel(selectedRecipe, this, this.modeByRecipe.get(selectedRecipe));
+            recipeDisplayPanel = new RecipeDisplayPanel(selectedRecipe, this.modeByRecipe.get(selectedRecipe));
             this.add(recipeDisplayPanel, "growx, growy");
             recipeDisplayPanel.setBorder(BorderFactory.createLineBorder(RecipeAppConstants.BORDERS_AND_SEPARATORS_WHITE_COLOR, 2));
         } else {

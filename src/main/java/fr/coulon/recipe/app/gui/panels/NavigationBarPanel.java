@@ -1,9 +1,7 @@
 package fr.coulon.recipe.app.gui.panels;
 
-import fr.coulon.recipe.app.gui.panels.ingredients.IngredientsMainPanel;
-import fr.coulon.recipe.app.gui.panels.recipes.RecipeMainPanel;
-import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
+import fr.coulon.recipe.app.gui.util.ui.image.ImageUtils;
 import fr.coulon.recipe.app.gui.util.ui.image.UiIcons;
 import net.miginfocom.swing.MigLayout;
 
@@ -26,13 +24,13 @@ public class NavigationBarPanel extends JPanel {
         this.add(tabContainerPanel, "dock north");
 
         BufferedImage recipeImage = ImageUtils.resizeImage(UiIcons.RECIPE.getImage(), 64, 64);
-        TabPanel recipeTab = new TabPanel(recipeImage, this, new RecipeMainPanel());
+        TabPanel recipeTab = new TabPanel(recipeImage, this, AppPanels.RECIPE_MAIN_PANEL);
         tabContainerPanel.add(recipeTab, "aligny top, h 80!, w 80!, wrap");
         recipeTab.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, RecipeAppConstants.PANEL_BACKGROUND_COLOR));
         tabPanels.add(recipeTab);
 
         BufferedImage ingredientsImage = ImageUtils.resizeImage(UiIcons.INGREDIENTS.getImage(), 64, 64);
-        TabPanel ingredientsTab = new TabPanel(ingredientsImage, this, new IngredientsMainPanel());
+        TabPanel ingredientsTab = new TabPanel(ingredientsImage, this, AppPanels.INGREDIENTS_MAIN_PANEL);
         tabContainerPanel.add(ingredientsTab, "aligny top, h 80!, w 80!, wrap");
         ingredientsTab.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, RecipeAppConstants.PANEL_BACKGROUND_COLOR));
         tabPanels.add(ingredientsTab);

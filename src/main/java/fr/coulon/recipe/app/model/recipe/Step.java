@@ -7,6 +7,11 @@ public class Step {
         this.description = description;
     }
 
+    @Deprecated
+    public Step() {
+        // For jackson only
+    }
+
     public String getDescription() {
         return description;
     }

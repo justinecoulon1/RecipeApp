@@ -9,5 +9,4 @@ public interface RecipeManagerListener {
     void onRecipeSelection(Recipe selectedRecipe);
     void onRecipeUpdate(Recipe updatedRecipe);
 
-
 }

@@ -1,5 +1,6 @@
 package fr.coulon.recipe.app.gui.panels.recipes.display.ingredients;
 
+import fr.coulon.recipe.app.gui.panels.AppPanels;
 import fr.coulon.recipe.app.gui.panels.recipes.display.RecipeDisplayMode;
 import fr.coulon.recipe.app.gui.util.RecipeAppConstants;
 import fr.coulon.recipe.app.gui.util.ui.RecipeButtonUtils;
@@ -23,11 +24,13 @@ public class RecipeIngredientPanel extends JPanel {
 
     private static final BufferedImage UNKNOWN_IMAGE = ImageUtils.resizeImage(UiIcons.UNKNOWN.getImage(), 40, 40);
     private final JButton deleteIngredientButton;
+    private final JButton addIngredientButton;
     private final RecipeIngredientsDisplayPanel recipeIngredientsDisplayPanel;
     private Ingredient ingredient;
     private final SearchableTextField ingredientNameTextField;
     private final JTextField ingredientAmountTextField;
     private final JLabel ingredientImageLabel;
+    private boolean isIngredientAlreadyStored;
 
     public RecipeIngredientPanel(Ingredient ingredient, String amount, RecipeIngredientsDisplayPanel recipeIngredientsDisplayPanel, RecipeDisplayMode displayMode) {
         this.ingredient = ingredient;
@@ -44,10 +47,8 @@ public class RecipeIngredientPanel extends JPanel {
         ingredientImageLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         this.add(ingredientImageLabel, "h 50!, w 50!, gapbefore 15");
 
-        JPanel ingredientInfoContainer = new JPanel();
+        JPanel ingredientInfoContainer = new JPanel(new MigLayout("fill, nogrid, ins 5"));
         ingredientInfoContainer.setBackground(getBackground());
-        ingredientInfoContainer.setLayout(new MigLayout("fill, nogrid, ins 5"));
-        this.add(ingredientInfoContainer, "growx");
 
         JLabel nameLabel = new JLabel();
         nameLabel.setText("Name: ");
@@ -100,22 +101,44 @@ public class RecipeIngredientPanel extends JPanel {
         ingredientAmountTextField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.gray), BorderFactory.createEmptyBorder(0, 5, 0, 5)));
         ingredientInfoContainer.add(ingredientAmountTextField, "growx, h 25!");
 
+        this.add(ingredientInfoContainer, "growx");
+
+        JPanel buttonPanel = new JPanel(new MigLayout("fill, nogrid, ins 5"));
+        buttonPanel.setBackground(getBackground());
+
         deleteIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.DELETE);
         deleteIngredientButton.addActionListener(this::handleDeleteIngredientButton);
-        this.add(deleteIngredientButton, "aligny top, alignx right, h 30!, w 30!, gapbefore 10, gapafter 15, gaptop 10");
+        buttonPanel.add(deleteIngredientButton, "aligny top, alignx right, h 30!, w 30!, gapbefore 10, gapafter 15, wrap");
 
-        updateIngredient(ingredient);
+        addIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
+        addIngredientButton.addActionListener(this::handleAddIngredientButton);
+        buttonPanel.add(addIngredientButton, "aligny bottom, alignx right, h 30!, w 30!, gapbefore 10, gapafter 15");
+
+        this.add(buttonPanel, "alignx right");
+
+        onIngredientNameChange();
         updateDisplayMode(displayMode);
+    }
+
+    public void updateIngredient() {
+        this.ingredientNameTextField.setText(ingredient.getName());
+        onIngredientNameChange();
     }
 
     private void onIngredientNameChange() {
         String ingredientName = ingredientNameTextField.getText();
         Ingredient newIngredient = IngredientManager.INSTANCE.getIngredientByName(ingredientName);
-        updateIngredient(Objects.requireNonNullElseGet(newIngredient, () -> new Ingredient(ingredientName)));
+        isIngredientAlreadyStored = newIngredient != null;
+        this.ingredient = Objects.requireNonNullElseGet(newIngredient, () -> new Ingredient(ingredientName));
+        updateIngredientDisplay();
     }
 
     private void handleDeleteIngredientButton(ActionEvent e) {
         this.recipeIngredientsDisplayPanel.deleteIngredientPanel(this.getIngredient());
+    }
+
+    private void handleAddIngredientButton(ActionEvent e) {
+        AppPanels.INGREDIENTS_MAIN_PANEL.openCreateIngredientPopup(ingredient);
     }
 
     public Ingredient getIngredient() {
@@ -141,6 +164,7 @@ public class RecipeIngredientPanel extends JPanel {
             ingredientAmountTextField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.gray), BorderFactory.createEmptyBorder(0, 5, 0, 5)));
 
             deleteIngredientButton.setVisible(true);
+            addIngredientButton.setVisible(!isIngredientAlreadyStored);
         } else if (displayMode == RecipeDisplayMode.READ) {
             ingredientNameTextField.getTextField().setEditable(false);
             ingredientNameTextField.setFocusable(false);
@@ -151,16 +175,17 @@ public class RecipeIngredientPanel extends JPanel {
             ingredientAmountTextField.setBorder(null);
 
             deleteIngredientButton.setVisible(false);
+            addIngredientButton.setVisible(false);
         }
     }
 
-    private void updateIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
+    private void updateIngredientDisplay() {
+        this.addIngredientButton.setVisible(!this.isIngredientAlreadyStored);
 
         BufferedImage ingredientImage = UNKNOWN_IMAGE;
         if (ingredient.getIngredientImage() != null) {
-            ingredientImage = ImageUtils.resizeImage(ingredient.getIngredientImage(), 50, 50) ;
+            ingredientImage = ImageUtils.resizeImage(ingredient.getIngredientImage(), 50, 50);
         }
-        ingredientImageLabel.setIcon(new ImageIcon(ingredientImage));
+        this.ingredientImageLabel.setIcon(new ImageIcon(ingredientImage));
     }
 }

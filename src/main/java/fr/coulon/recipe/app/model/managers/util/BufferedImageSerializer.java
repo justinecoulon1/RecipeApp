@@ -19,5 +19,4 @@ public class BufferedImageSerializer extends JsonSerializer<BufferedImage> {
             jsonGenerator.writeBinary(bytes);
         }
     }
-
 }

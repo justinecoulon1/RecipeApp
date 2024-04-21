@@ -108,10 +108,12 @@ public class RecipeIngredientPanel extends JPanel {
 
         deleteIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.DELETE);
         deleteIngredientButton.addActionListener(this::handleDeleteIngredientButton);
+        deleteIngredientButton.setToolTipText("Delete ingredient");
         buttonPanel.add(deleteIngredientButton, "aligny top, alignx right, h 30!, w 30!, gapbefore 10, gapafter 15, wrap");
 
         addIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
         addIngredientButton.addActionListener(this::handleAddIngredientButton);
+        addIngredientButton.setToolTipText("Save ingredient");
         buttonPanel.add(addIngredientButton, "aligny bottom, alignx right, h 30!, w 30!, gapbefore 10, gapafter 15");
 
         this.add(buttonPanel, "alignx right");

@@ -35,12 +35,14 @@ public class IngredientEditCardHeaderPanel extends IngredientCardHeaderPanel {
         if (cardMode == IngredientsCardMode.UPDATE || cardMode == IngredientsCardMode.CREATE) {
             JButton cancelEditButton = RecipeButtonUtils.createSmallButton(UiIcons.CANCEL);
             cancelEditButton.addActionListener(this::handleCancelEditIngredientCardButton);
+            cancelEditButton.setToolTipText("Cancel modifications");
             this.add(cancelEditButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
         }
 
         if (cardMode == IngredientsCardMode.UPDATE || cardMode == IngredientsCardMode.CREATE) {
             JButton validateUpdateButton = RecipeButtonUtils.createSmallButton(UiIcons.VALIDATE);
             validateUpdateButton.addActionListener(e -> handleValidateIngredientCardButton(cardMode));
+            validateUpdateButton.setToolTipText("Save modifications");
             this.add(validateUpdateButton, "aligny top, dock east, h 30!, w 30!, gaptop 10, gapafter 10");
         }
     }

@@ -47,6 +47,7 @@ public class RecipeNamePanel extends JPanel implements MouseListener {
         deleteRecipeButton.setMaximumSize(new Dimension(plusButtonSize, plusButtonSize));
         deleteRecipeButton.setMinimumSize(new Dimension(plusButtonSize, plusButtonSize));
         deleteRecipeButton.setPreferredSize(new Dimension(plusButtonSize, plusButtonSize));
+        deleteRecipeButton.setToolTipText("Delete recipe");
 
         deleteRecipeButton.addMouseListener(new MouseAdapter() {
             @Override

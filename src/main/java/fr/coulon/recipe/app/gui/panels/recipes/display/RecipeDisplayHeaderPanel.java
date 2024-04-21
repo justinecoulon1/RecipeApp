@@ -44,12 +44,15 @@ public class RecipeDisplayHeaderPanel extends JPanel {
 
         cancelModificationButton = RecipeButtonUtils.createBigButton(UiIcons.CANCEL);
         cancelModificationButton.addActionListener(this::handleCancelModificationButton);
+        cancelModificationButton.setToolTipText("Cancel modifications");
 
         validateModificationButton = RecipeButtonUtils.createBigButton(UiIcons.VALIDATE);
         validateModificationButton.addActionListener(this::handleValidateModificationButton);
+        validateModificationButton.setToolTipText("Save modifications");
 
         editRecipeButton = RecipeButtonUtils.createBigButton(UiIcons.EDIT);
         editRecipeButton.addActionListener(this::handleEditButton);
+        editRecipeButton.setToolTipText("Edit recipe");
 
         updateDisplayMode(displayMode);
     }

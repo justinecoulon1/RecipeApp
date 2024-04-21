@@ -29,6 +29,7 @@ public class IngredientsHeaderPanel extends JPanel {
 
         JButton addIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
         addIngredientButton.addActionListener(this::handleAddIngredientButton);
+        addIngredientButton.setToolTipText("Create an ingredient");
         this.add(addIngredientButton, "h 45!, w 45!, dock east, gapafter 15");
 
     }

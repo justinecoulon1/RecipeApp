@@ -28,6 +28,7 @@ public class RecipeListHeaderPanel extends JPanel {
 
         JButton createRecipeButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
         createRecipeButton.addActionListener(this::handleCreateRecipeButton);
+        createRecipeButton.setToolTipText("Create a recipe");
         this.add(createRecipeButton, "h 30!, w 30!, gapafter 10");
     }
 

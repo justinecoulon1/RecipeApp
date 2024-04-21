@@ -37,10 +37,10 @@ public class IngredientPropertiesPanel extends JPanel {
         seasonPanel.setBackground(getBackground());
         this.add(seasonPanel, "dock north, wrap");
 
-        winterImageLabel = addIngredientPropertyLabel(UiIcons.WINTER, cardMode, seasonPanel);
-        springImageLabel = addIngredientPropertyLabel(UiIcons.SPRING, cardMode, seasonPanel);
-        summerImageLabel = addIngredientPropertyLabel(UiIcons.SUMMER, cardMode, seasonPanel);
-        autumnImageLabel = addIngredientPropertyLabel(UiIcons.AUTUMN, cardMode, seasonPanel);
+        winterImageLabel = addIngredientPropertyLabel(UiIcons.WINTER, cardMode, seasonPanel, "Winter");
+        springImageLabel = addIngredientPropertyLabel(UiIcons.SPRING, cardMode, seasonPanel, "Spring");
+        summerImageLabel = addIngredientPropertyLabel(UiIcons.SUMMER, cardMode, seasonPanel, "Summer");
+        autumnImageLabel = addIngredientPropertyLabel(UiIcons.AUTUMN, cardMode, seasonPanel, "Autumn");
 
         JLabel categoriesHeader = new JLabel();
         categoriesHeader.setText("Categories");
@@ -53,20 +53,21 @@ public class IngredientPropertiesPanel extends JPanel {
         categoriesPanel.setBackground(getBackground());
         this.add(categoriesPanel, "dock north, wrap");
 
-        glutenImageLabel = addIngredientPropertyLabel(UiIcons.GLUTEN, cardMode, categoriesPanel);
-        fishImageLabel = addIngredientPropertyLabel(UiIcons.FISH, cardMode, categoriesPanel);
-        meatImageLabel = addIngredientPropertyLabel(UiIcons.MEAT, cardMode, categoriesPanel);
-        carbohydrateImageLabel = addIngredientPropertyLabel(UiIcons.CARBOHYDRATE, cardMode, categoriesPanel);
-        dairyImageLabel = addIngredientPropertyLabel(UiIcons.DAIRY, cardMode, categoriesPanel);
-        drinksImageLabel = addIngredientPropertyLabel(UiIcons.DRINKS, cardMode, categoriesPanel);
-        condimentsImageLabel = addIngredientPropertyLabel(UiIcons.CONDIMENT, cardMode, categoriesPanel);
-        greensImageLabel = addIngredientPropertyLabel(UiIcons.GREENS, cardMode, categoriesPanel);
+        glutenImageLabel = addIngredientPropertyLabel(UiIcons.GLUTEN, cardMode, categoriesPanel, "Gluten");
+        fishImageLabel = addIngredientPropertyLabel(UiIcons.FISH, cardMode, categoriesPanel, "Fish");
+        meatImageLabel = addIngredientPropertyLabel(UiIcons.MEAT, cardMode, categoriesPanel, "Meat");
+        carbohydrateImageLabel = addIngredientPropertyLabel(UiIcons.CARBOHYDRATE, cardMode, categoriesPanel, "Carbohydrates");
+        dairyImageLabel = addIngredientPropertyLabel(UiIcons.DAIRY, cardMode, categoriesPanel, "Dairy");
+        drinksImageLabel = addIngredientPropertyLabel(UiIcons.DRINKS, cardMode, categoriesPanel, "Drinks");
+        condimentsImageLabel = addIngredientPropertyLabel(UiIcons.CONDIMENT, cardMode, categoriesPanel, "Condiments");
+        greensImageLabel = addIngredientPropertyLabel(UiIcons.GREENS, cardMode, categoriesPanel, "Fruits & Veggies");
 
         updateIngredientProperties(ingredientProperties);
     }
 
-    private IngredientPropertyLabel addIngredientPropertyLabel(UiIcons icon, IngredientsCardMode cardMode, JPanel containerPanel) {
+    private IngredientPropertyLabel addIngredientPropertyLabel(UiIcons icon, IngredientsCardMode cardMode, JPanel containerPanel, String tooltip) {
         IngredientPropertyLabel imageLabel = new IngredientPropertyLabel(icon, cardMode);
+        imageLabel.setToolTipText(tooltip);
         containerPanel.add(imageLabel, "aligny top, alignx center, gapbefore 5, gapafter 5");
         return imageLabel;
     }

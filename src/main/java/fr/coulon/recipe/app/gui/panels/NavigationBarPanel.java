@@ -27,12 +27,14 @@ public class NavigationBarPanel extends JPanel {
         TabPanel recipeTab = new TabPanel(recipeImage, this, AppPanels.RECIPE_MAIN_PANEL);
         tabContainerPanel.add(recipeTab, "aligny top, h 80!, w 80!, wrap");
         recipeTab.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, RecipeAppConstants.PANEL_BACKGROUND_COLOR));
+        recipeTab.setToolTipText("Recipe tab");
         tabPanels.add(recipeTab);
 
         BufferedImage ingredientsImage = ImageUtils.resizeImage(UiIcons.INGREDIENTS.getImage(), 64, 64);
         TabPanel ingredientsTab = new TabPanel(ingredientsImage, this, AppPanels.INGREDIENTS_MAIN_PANEL);
         tabContainerPanel.add(ingredientsTab, "aligny top, h 80!, w 80!, wrap");
         ingredientsTab.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, RecipeAppConstants.PANEL_BACKGROUND_COLOR));
+        ingredientsTab.setToolTipText("Ingredients tab");
         tabPanels.add(ingredientsTab);
 
         selectTab(recipeTab);

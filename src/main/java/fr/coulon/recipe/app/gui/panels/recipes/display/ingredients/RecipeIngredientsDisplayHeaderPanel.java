@@ -31,6 +31,7 @@ public class RecipeIngredientsDisplayHeaderPanel extends JPanel {
 
         addIngredientButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
         addIngredientButton.addActionListener(this::handleIngredientAdditionButton);
+        addIngredientButton.setToolTipText("Add an ingredient");
         this.add(addIngredientButton, "h 30!, w 30!");
 
         updateDisplayMode(displayMode);

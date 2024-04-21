@@ -47,6 +47,7 @@ public class RecipeStepPanel extends JPanel {
 
         deleteStepButton = RecipeButtonUtils.createSmallButton(UiIcons.DELETE);
         deleteStepButton.addActionListener(this::handleDeleteStepButton);
+        deleteStepButton.setToolTipText("Delete step");
         this.add(deleteStepButton, "h 30, w 30, gapbefore 10");
 
         updateDisplayMode(displayMode);

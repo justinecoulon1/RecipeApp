@@ -56,10 +56,12 @@ public class IngredientViewCardHeaderPanel extends IngredientCardHeaderPanel {
 
         JButton deleteIngredientCardButton = RecipeButtonUtils.createSmallButton(UiIcons.DELETE);
         deleteIngredientCardButton.addActionListener(this::handleDeleteIngredientCardButton);
+        deleteIngredientCardButton.setToolTipText("Delete ingredient");
         buttonsPanel.add(deleteIngredientCardButton, "aligny top, alignx right, h 30!, w 30!, wrap");
 
         JButton editIngredientCardButton = RecipeButtonUtils.createSmallButton(UiIcons.EDIT);
         editIngredientCardButton.addActionListener(this::handleEditIngredientCardButton);
+        editIngredientCardButton.setToolTipText("Edit ingredient");
         buttonsPanel.add(editIngredientCardButton, "aligny top, alignx right, h 30!, w 30!");
 
         this.add(buttonsPanel, "alignx right, aligny top");

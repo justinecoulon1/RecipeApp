@@ -86,6 +86,7 @@ public class IngredientEditCardImageInfoPanel extends JPanel {
         refreshImageButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         refreshImageButton.setFocusable(false);
         refreshImageButton.addActionListener(this::handleRefreshImageButton);
+        refreshImageButton.setToolTipText("Display image");
         this.add(refreshImageButton, "alignx right, h 23!, w 23!, wrap");
 
         urlTextArea = new JTextArea();

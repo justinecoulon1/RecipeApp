@@ -32,6 +32,7 @@ public class RecipeStepsDisplayHeaderPanel extends JPanel {
 
         addStepButton = RecipeButtonUtils.createSmallButton(UiIcons.PLUS);
         addStepButton.addActionListener(this::handleStepAdditionButton);
+        addStepButton.setToolTipText("Add a step");
         this.add(addStepButton, "h 30!, w 30!");
 
         updateDisplayMode(displayMode);

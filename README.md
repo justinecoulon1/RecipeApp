@@ -40,17 +40,18 @@ To save, you can click the :ballot_box_with_check: button. Once your ingredient 
 ## Roadmap
 ### Features
 
-- Option to create ingredient from the recipe tab.
-- Option to create categories of ingredients of steps (for example: "1. ingredients for the dressing 2. ingredients for the salad).
-- Option to sort your ingredients by their category (seasons and food category) as well as by diet (vegan, vegetarian, etc.)
-- Option to sort your recipes alphabetically, by diet etc.
-- Adding a community tab where you can share your recipes with other users.
-- Adding a way to send recipes to another user.
-- Adding a "shopping list" tab where you can add your ingredients and their amount needed for a recipe.
+- [x] Option to create ingredient from the recipe tab.
+- [ ] Option to create categories of ingredients of steps (for example: "1. ingredients for the dressing 2. ingredients for the salad).
+- [ ] Option to sort your ingredients by their category (seasons and food category) as well as by diet (vegan, vegetarian, etc.)
+- [ ] Option to sort your recipes alphabetically, by diet etc.
+- [ ] Adding a community tab where you can share your recipes with other users.
+- [ ] Adding a way to send recipes to another user.
+- [ ] Adding a "shopping list" tab where you can add your ingredients and their amount needed for a recipe.
+
 
 ### Technical
-- Create a spring boot server to manage recipes, ingredients and later users.
-- Handle translation.
-- Android app.
-- Browser app.
+- [ ] Create a spring boot server to manage recipes, ingredients and later users.
+- [ ] Handle translation.
+- [ ] Android app.
+- [ ] Browser app.
  
